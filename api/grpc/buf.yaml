@@ -1,0 +1,13 @@
+version: v1
+lint:
+  enum_zero_value_suffix: _INVALID
+  use:
+    - DEFAULT
+    - UNARY_RPC
+    - COMMENTS
+  except:
+    - COMMENT_FIELD
+    - COMMENT_MESSAGE
+breaking:
+  use:
+    - PACKAGE

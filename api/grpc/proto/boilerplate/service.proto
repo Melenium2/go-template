@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package boilerplate;
+
+service FooService {
+  rpc Bar (BarRequest) returns (BarResponse) {}
+}
+
+message BarRequest {
+  string user_id = 1;
+}
+
+message BarResponse {
+  int32 status = 1;
+  string message = 2;
+}

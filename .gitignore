@@ -1,0 +1,8 @@
+.vscode
+.fleet
+.idea
+.DS_Store
+.env
+jrpc_data
+__debug_bin
+draft

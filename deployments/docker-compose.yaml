@@ -1,0 +1,22 @@
+services:
+  db:
+    image: postgres:latest
+    container_name: boilerplate-postgres
+    restart: always
+    ports:
+      - "5445:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: boilerplate
+
+  rabbitmq:
+    image: rabbitmq:3.11-management
+    container_name: boilerplate-rabbitmq
+    restart: always
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
