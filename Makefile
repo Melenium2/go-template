@@ -1,6 +1,6 @@
 .PHONY: test
 test:
-	go test -filepath -race -cover -bench=. ./...
+	go test -fullpath -race -cover -bench=. ./...
 
 lint:
 	docker run --rm -it -v $(PWD):/app -w /app golangci/golangci-lint:latest golangci-lint run -v
