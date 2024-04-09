@@ -19,7 +19,7 @@ var (
 type Config struct {
 	Environment Env    `env:"ENVIRONMENT" envDefault:"dev"`
 	Branch      string `env:"BRANCH"`
-	HttpPort    string `env:"HTTP_PORT" envDefault:"4000"`
+	HTTPPort    string `env:"HTTP_PORT" envDefault:"4000"`
 
 	DB   DB
 	Amqp Amqp

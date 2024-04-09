@@ -3,7 +3,7 @@ package main
 import (
 	"log"
 
-	"github.com/Melenium2/go-tempalte/internal/container"
+	"github.com/Melenium2/go-template/internal/container"
 )
 
 func main() {

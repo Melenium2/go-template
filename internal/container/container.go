@@ -1,3 +1,4 @@
+//nolint:revive
 package container
 
 import (
@@ -59,7 +60,7 @@ func NewContainer() *Container {
 }
 
 func (c *Container) Run() error {
-	p := fmt.Sprintf(":%s", c.Config.HttpPort)
+	p := fmt.Sprintf(":%s", c.Config.HTTPPort)
 
-	return http.ListenAndServe(p, nil)
+	return http.ListenAndServe(p, nil) //nolint:gosec
 }

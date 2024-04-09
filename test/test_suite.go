@@ -14,7 +14,7 @@ import (
 	_ "github.com/lib/pq"
 	"github.com/stretchr/testify/suite"
 
-	"github.com/Melenium2/go-tempalte/internal/common/tx"
+	"github.com/Melenium2/go-template/internal/common/tx"
 )
 
 type config struct {
