@@ -1,6 +1,6 @@
-module github.com/Melenium2/go-tempalte
+module github.com/Melenium2/go-template
 
-go 1.21
+go 1.22
 
 require (
 	github.com/DATA-DOG/go-sqlmock v1.5.0

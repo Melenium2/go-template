@@ -14,6 +14,8 @@ linters:
     - nosnakecase
     - ireturn
     - depguard
+    - perfsprint
+    - intrange
 linters-settings:
   tagliatelle:
     case:
@@ -77,8 +79,8 @@ linters-settings:
   gomnd:
     settings:
       mnd:
-        checks: [ argument,case,condition,operation,return,assign ]
-        ignored-numbers: [ 1,2,3,10,64,512 ]
+        checks: [argument, case, condition, operation, return, assign]
+        ignored-numbers: [1, 2, 3, 10, 64, 512]
   funlen:
     # Checks the number of lines in a function.
     # If lower than 0, disable the check.
@@ -333,10 +335,10 @@ linters-settings:
         severity: warning
         disabled: false
         arguments:
-          - - 'core.WriteError[1].Message'
-            - '/^([^A-Z]|$)/'
+          - - "core.WriteError[1].Message"
+            - "/^([^A-Z]|$)/"
             - must not start with a capital letter
-          - - 'fmt.Errorf[0]'
+          - - "fmt.Errorf[0]"
             - '/(^|[^\.!?])$/'
             - must not end in punctuation
           - - panic
@@ -416,9 +418,8 @@ linters-settings:
         severity: warning
         disabled: false
   stylecheck:
-    checks: [ "all", "-ST1003" ]
+    checks: ["all", "-ST1003"]
 run:
-  modules-download-mode: vendor
   skip-dirs:
     - "api"
     - "mocks"
