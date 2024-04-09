@@ -10,7 +10,10 @@ import (
 
 	"github.com/golang-migrate/migrate/v4"
 	"github.com/golang-migrate/migrate/v4/database/postgres"
+
+	//revive:disable:blank-imports
 	_ "github.com/golang-migrate/migrate/v4/source/file"
+	//revive:enable:blank-imports
 	"github.com/golang-migrate/migrate/v4/source/iofs"
 )
 
@@ -58,7 +61,8 @@ func (c *Client) Setup(ctx context.Context, db *sql.DB, path string, migrTable .
 	return setupErr
 }
 
-func (c *Client) SetupFS(ctx context.Context, db *sql.DB, fs fs.FS, migrTable ...string) error {
+//revive:disable:cognitive-complexity
+func (c *Client) SetupFS(ctx context.Context, db *sql.DB, filesystem fs.FS, migrTable ...string) error {
 	var (
 		tableName = DefaultMigrationTable
 		setupErr  error
@@ -76,7 +80,7 @@ func (c *Client) SetupFS(ctx context.Context, db *sql.DB, fs fs.FS, migrTable ..
 			return
 		}
 
-		input, err := iofs.New(fs, ".")
+		input, err := iofs.New(filesystem, ".")
 		if err != nil {
 			setupErr = err
 
@@ -95,6 +99,8 @@ func (c *Client) SetupFS(ctx context.Context, db *sql.DB, fs fs.FS, migrTable ..
 
 	return setupErr
 }
+
+//revive:enable:cognitive-complexity
 
 func (c *Client) postgres(ctx context.Context, db *sql.DB, table string) (*postgres.Postgres, error) {
 	conn, err := db.Conn(ctx)

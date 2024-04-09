@@ -3,7 +3,9 @@ package psql
 import (
 	"fmt"
 
+	//revive:disable:blank-imports
 	_ "github.com/jackc/pgx/v5/stdlib"
+	//revive:enable:blank-imports
 	"github.com/jmoiron/sqlx"
 )
 

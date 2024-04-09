@@ -4,11 +4,11 @@ import (
 	"context"
 	"log"
 
-	"github.com/Melenium2/go-tempalte/pkg/psql"
 	"github.com/jmoiron/sqlx"
 
-	"github.com/Melenium2/go-tempalte/internal/common/tx"
-	"github.com/Melenium2/go-tempalte/pkg/migration"
+	"github.com/Melenium2/go-template/internal/common/tx"
+	"github.com/Melenium2/go-template/pkg/migration"
+	"github.com/Melenium2/go-template/pkg/psql"
 )
 
 func setupDatabase(cfg DB) *sqlx.DB {
