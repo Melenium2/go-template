@@ -3,6 +3,7 @@ package container
 import (
 	"context"
 	"log"
+	"strconv"
 
 	"github.com/jmoiron/sqlx"
 
@@ -12,23 +13,26 @@ import (
 )
 
 func setupDatabase(cfg DB) *sqlx.DB {
+	port, _ := strconv.Atoi(cfg.Port)
+
 	c := psql.Config{
-		Schema:   cfg.Schema,
-		Database: cfg.Database,
-		Host:     cfg.Host,
-		Port:     cfg.Port,
-		User:     cfg.User,
-		Password: cfg.Password,
+		Host:           cfg.Host,
+		Port:           port,
+		User:           cfg.User,
+		Password:       cfg.Password,
+		DatabaseName:   cfg.Database,
+		Schema:         cfg.Schema,
+		SimpleProtocol: true,
+		Pool: psql.PoolConfig{
+			MaxConnections:  cfg.MaxOpenedConnections,
+			MaxIddleTimeout: cfg.MaxIdleTimeout,
+		},
 	}
 
-	conn, err := psql.Connection(c)
+	conn, err := psql.Connect(c)
 	if err != nil {
 		log.Fatalf("error connecting database, %s", err.Error())
 	}
-
-	conn.SetMaxOpenConns(cfg.MaxOpenedConnections)
-	conn.SetMaxIdleConns(cfg.MaxOpenedConnections)
-	conn.SetConnMaxIdleTime(cfg.MaxIdleTimeout)
 
 	if err = conn.Ping(); err != nil {
 		log.Fatalf("could not connect to database, %s", err.Error())

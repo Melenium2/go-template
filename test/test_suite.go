@@ -6,15 +6,16 @@ import (
 	"os"
 	"path"
 	"runtime"
+	"strconv"
 	"strings"
 
-	"github.com/caarlos0/env/v6"
+	"github.com/caarlos0/env/v11"
 	"github.com/jmoiron/sqlx"
 	"github.com/joho/godotenv"
-	_ "github.com/lib/pq"
 	"github.com/stretchr/testify/suite"
 
 	"github.com/Melenium2/go-template/internal/common/tx"
+	"github.com/Melenium2/go-template/pkg/psql"
 )
 
 type config struct {
@@ -63,16 +64,25 @@ func NewSuite() DBSuite {
 func (suite *DBSuite) SetupSuite() error {
 	cfg := newConfig()
 
-	var (
-		address = fmt.Sprintf(
-			"host=%s port=%s user=%s password=%s dbname=%s sslmode=disable",
-			cfg.Host, cfg.Port, cfg.User, cfg.Password, cfg.Database,
-		)
-	)
+	port, _ := strconv.Atoi(cfg.Port)
 
-	db, err := sqlx.Connect("postgres", address)
+	psqlConfig := psql.Config{
+		Host:           cfg.Host,
+		Port:           port,
+		User:           cfg.User,
+		Password:       cfg.Password,
+		DatabaseName:   cfg.Database,
+		Schema:         cfg.Schema,
+		SimpleProtocol: true,
+	}
+
+	db, err := psql.Connect(psqlConfig)
 	if err != nil {
-		return fmt.Errorf("postgres is not connected, run local instance of postgres, err: %w", err)
+		return fmt.Errorf("postgres connection is not established, %w", err)
+	}
+
+	if err := db.Ping(); err != nil {
+		return fmt.Errorf("postgres is not connected, run local instance of postgres, %w", err)
 	}
 
 	suite.Conn = db

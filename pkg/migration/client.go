@@ -1,5 +1,6 @@
 package migration
 
+//revive:disable:blank-imports
 import (
 	"context"
 	"database/sql"
@@ -10,12 +11,11 @@ import (
 
 	"github.com/golang-migrate/migrate/v4"
 	"github.com/golang-migrate/migrate/v4/database/postgres"
-
-	//revive:disable:blank-imports
 	_ "github.com/golang-migrate/migrate/v4/source/file"
-	//revive:enable:blank-imports
 	"github.com/golang-migrate/migrate/v4/source/iofs"
 )
+
+//revive:enable:blank-imports
 
 const DefaultMigrationTable = "schema_migrations"
 
