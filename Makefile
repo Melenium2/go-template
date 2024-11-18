@@ -16,3 +16,7 @@ infra-start:
 
 infra-stop:
 	cd ./deployments && docker compose -p boilerplate stop
+
+.PHONY: vendor
+vendor:
+	go mod tidy && go mod vendor
