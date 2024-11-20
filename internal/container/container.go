@@ -4,6 +4,8 @@ package container
 import (
 	"fmt"
 	"net/http"
+
+	"github.com/Melenium2/go-template/pkg/logger"
 )
 
 type Container struct {
@@ -46,6 +48,8 @@ func NewContainer() *Container {
 
 	conn := setupDatabase(cfg.DB)
 	setupMigrations(conn)
+
+	logger.SetupLogger()
 
 	container := &Container{Config: cfg}
 
