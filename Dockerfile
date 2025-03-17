@@ -1,6 +1,6 @@
-FROM golang:1.23 as build
+FROM golang:1.24 as build
 
-ARG WORKDIR=${GOPATH}/src/qleanlabs/app/
+ARG WORKDIR=${GOPATH}/src/app/
 ARG GITLAB_GO_TOKEN
 
 WORKDIR ${WORKDIR}
