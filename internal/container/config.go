@@ -29,7 +29,7 @@ type DB struct {
 	Schema               string        `env:"DATABASE_SCHEMA" envDefault:"public"`
 	Database             string        `env:"PGDATABASE" envDefault:"postgres"`
 	Host                 string        `env:"PGHOST" envDefault:"localhost"`
-	Port                 string        `env:"PGPORT" envDefault:"5432"`
+	Port                 int           `env:"PGPORT" envDefault:"5432"`
 	User                 string        `env:"PGUSER" evnDefault:"postgres"`
 	Password             string        `env:"PGPASSWORD" envDefault:"postgres"`
 	MaxOpenedConnections int           `env:"DATABASE_MAX_OPENED_CONNECTIONS" envDefault:"10"`

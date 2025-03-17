@@ -13,22 +13,24 @@ import (
 
 func setupDatabase(cfg DB) *sqlx.DB {
 	c := psql.Config{
-		Schema:   cfg.Schema,
-		Database: cfg.Database,
-		Host:     cfg.Host,
-		Port:     cfg.Port,
-		User:     cfg.User,
-		Password: cfg.Password,
+		Schema:         cfg.Schema,
+		DatabaseName:   cfg.Database,
+		Host:           cfg.Host,
+		Port:           cfg.Port,
+		User:           cfg.User,
+		Password:       cfg.Password,
+		SimpleProtocol: true,
+		Pool: psql.PoolConfig{
+			MaxConnections:  cfg.MaxOpenedConnections,
+			MinConnections:  1,
+			MaxIddleTimeout: cfg.MaxIdleTimeout,
+		},
 	}
 
-	conn, err := psql.Connection(c)
+	conn, err := psql.Connect(c)
 	if err != nil {
 		log.Fatalf("error connecting database, %s", err.Error())
 	}
-
-	conn.SetMaxOpenConns(cfg.MaxOpenedConnections)
-	conn.SetMaxIdleConns(cfg.MaxOpenedConnections)
-	conn.SetConnMaxIdleTime(cfg.MaxIdleTimeout)
 
 	if err = conn.Ping(); err != nil {
 		log.Fatalf("could not connect to database, %s", err.Error())
