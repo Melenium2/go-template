@@ -46,5 +46,5 @@ The project will be initialized with specified module name.
 // go.mod
 module github.com/Melenium2/myservice
 
-go 1.21
+go 1.24
 ```
